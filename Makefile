@@ -1,25 +1,45 @@
-NAME			=	phIlosophers
+# Source, Executable, Includes, Library Defines
+NAME		=		philosophers
 
-SOURCE_FILES	= 	tread.c
-SOURCE_DIR		=	src
 
-INCLUDES		= 	INCLUDES
-INCLUDES 		:= 	${addfrefix -I, $(INCLUDES)}
+INCLUDE_DIR	=	./include
+INCLUDE 	:=	$(addprefix -I, $(INCLUDE_DIR)) 
+HEADERS 	:= 	$(INCLUDE)/philosophers.h
 
-CC				=	gcc
+SRC_DIR		= 	./src/core
+SRC_FILES	=	philos.c error_check.c
+SRC			=	$(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
-CFLAGS			=	-Wall -Wextra -Werror -lpthread -fsanitize=address
+UTIL_DIR 	= 	./src/utils 
+UTIL_FILES	=	ft_atoi.c ft_isdigit.c ft_memset.c philos_atoi.c
+UTIL		=	$(addprefix $(UTIL_DIR)/, $(UTIL_FILES))
 
-RM				=	rm -fr
+OBJ_DIR		=	./obj
+OBJ			=	$(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+OBJ_UTILS	=	$(UTIL:$(UTIL_DIR)/%.c=$(OBJ_DIR)%.o)
 
-OBJS_DIR		= 	obj
-OBJS			=	$(subst $(SOURCE_DIR,$(OBJS_DIR),$(SOURCE_FILES:.c=.o)))
+RM			=	rm -f
+
+CC			=	gcc
+CFLAGS		=	-Wall -Wextra - Werror
+VALGRIND	= 	valgrind -q --leak-check=full --show-leak-kinds=all - s --track-origins=yes
 
 all: $(NAME)
 
-$(NAME) $(OBJS)
-@-$(CC) $(CFLAGS) $(OBJS)
+$(NAME): $(OBJ_DIR) $(OBJ_UTILS) $(OBJ)
+	@echo "\033[32mEXECUTANDO ARQUIVOS...\033[0m"
+	$(CC) $(OBJ) $(CFLAGS) $(OBJ_UTILS) -o $@
+
+$(OBJ_DIR):
+	mkdir $(OBJ_DIR)
+
+$(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c $(UTIL_DIR)/%.c $(HEADERS)
+	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
+	$(RM) $(OBJ)
+	$(RM) $(NAME)
 
-fclean:
+re: clean all
+
+.PHONY: all clean re
