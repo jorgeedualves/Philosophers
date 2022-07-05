@@ -6,13 +6,13 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 14:32:29 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/01 14:32:32 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/05 07:01:26 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-double	philo_atoi(const char *ptr)
+double	philos_atoi(const char *ptr)
 {
 	double	number;
 

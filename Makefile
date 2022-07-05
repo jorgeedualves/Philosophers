@@ -47,28 +47,39 @@
 
 
 # Source, Executable, Includes, Library Defines
-NAME	=	philosopher
-INCL	=	./include
-SRC		=	src/core/philos.c src/core/error_check.c \
-			src/utils/ft_atoi.c src/utils/ft_isdigit.c src/utils/ft_memset.c src/utils/philos_atoi.c
-OBJ		=	./obj
+NAME		=	philosopher
+INCL		=	-I include
+
+#SRC_DIR		=	./src/core
+SRC			=	/src/core/philos.c /src/core/error_check.c /src/coreget_arguments.c
+
+UTIL_DIR	=	./src/utils
+UTILS		=	ft_atoi.c ft_isdigit.c ft_memset.c philos_atoi.c	
+
+OBJ			=	./obj
 
 # Compiler, Linker Defines
-CC		=	gcc
-CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=address #-lpthread
+CC		=	gcc -c
+CFLAGS	=	-Wall -Wextra -Werror #-g -fsanitize=address #-lpthread
 RM		=	rm -rf
 
-all:	libfilo bin
+all:	libfilo
 
-libfilo:
-	$(CC) -c src/core/error_check.c -I $(INCL) -o $(OBJ)/error_check.o
-	$(CC) -c src/core/get_arguments.c -I $(INCL) -o $(OBJ)/get_arguments.o
-	$(CC) -c src/utils/ft_isdigit.c -I $(INCL) -o $(OBJ)/ft_isdigit.o
-	$(CC) -c src/utils/ft_memset.c -I $(INCL) -o $(OBJ)/ft_memset.o
-	$(CC) -c src/utils/philos_atoi.c -I $(INCL) -o $(OBJ)/philos_atoi.o
+libfilo: $(OBJ)/error_check.o
+#	$(CC) -c $(SRC_DIR)/error_check.c $(INCL) -o $(OBJ)/error_check.o
+#	$(CC) -c $(SRC_DIR)/get_arguments.c $(INCL) -o $(OBJ)/get_arguments.o
+#	$(CC) -c $(UTIL_DIR)/ft_isdigit.c $(INCL) -o $(OBJ)/ft_isdigit.o
+#	$(CC) -c $(UTIL_DIR)/ft_memset.c $(INCL) -o $(OBJ)/ft_memset.o
+#	$(CC) -c $(UTIL_DIR)/ft_atoi.c $(INCL) -o $(OBJ)/ft_atoi.o
+#	$(CC) -c $(UTIL_DIR)/philos_atoi.c $(INCL) -o $(OBJ)/philos_atoi.o
+#	$(CC) -c $(SRC_DIR)/%.$(SRC).c $(INCL) -o $(OBJ)/%.o
+#	$(CC) -c $(UTIL_DIR)/*.c $(INCL) -o $(OBJ)/%.o
 
-bin:
-	$(CC) src/core/philos.c $(OBJ)/*.o -I $(INCL) -o philosophers
+#bin:
+#	$(CC) $(SRC_DIR)/philos.c $(OBJ)/*.o $(INCL) -o philosophers
+
+$(OBJ)/%.o: $(SRC)/%.c $(INCL)/%.h
+	$(CC) $(CFLAGS) $(SRC_DIR) $< $(INCL) -o $@
 
 
 # Compile and Assemble C Source Files into Object Files

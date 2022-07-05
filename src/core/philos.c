@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 14:28:25 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/01 16:54:30 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/05 06:15:24 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 int		main(int argc, char **argv)
 {
+	t_dinner dinner;
 	
 	if (!error_check(argc, argv))
 		return (EXIT_FAILURE);
-	// get_arguments(argc, argv, &philo_struct);
+	get_arguments(argc, argv, &dinner);
 	// if (!init_simulation(&philo_struct)
 		// return (EXIT_FAILURE);
 	// print_end_message(&philo_struct);
