@@ -1,45 +1,86 @@
 # Source, Executable, Includes, Library Defines
-NAME		=		philosophers
+#NAME		=		philosophers
+
+#INCLUDE		=	-I include
+
+#UTIL_DIR 	= 	./src/utils 
+#UTIL		=	$(UTIL_DIR)/utils.a
+#UTIL_FLAGS	=	-L $(UTIL_DIR) -lft
+
+#RM			=	rm -f
+
+#CC			=	gcc
+#CFLAGS		=	-Wall -Wextra - Werror -g -fsanitize=address -pthreads
+#VALGRIND	= 	valgrind -q --leak-check=full --show-leak-kinds=all - s --track-origins=yes
+
+#CORE		=	philos.c error_check.c
+
+#SRCS_DIR		=	src
+
+#FILES		=	$(addprefix CORE/, $(CORE))
+
+#SOUCE		=	$(addprefix src/, $(FILES))
+
+#OBJ_DIR		=	obj
+#OBJS		=	$(subst $(SRCS_DIR),$(OBJ_DIR),$(SOURCE:.c=.o))))	
+
+#all: $(NAME)
+
+#$(NAME): $(OBJ)
+#	make -C $(UTIL_DIR)
+#	@echo "\033[32mEXECUTANDO ARQUIVOS...\033[0m"
+#	$(CC) $(CFLAGS) $(OBJS) $(UTILS) $(UTIL_FLAGS) -o $@
+
+#$(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c
+#	@mkdir -p obj
+#	@mkdir -p obj/CORE
+#	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+
+#clean:
+#	$(RM) $(OBJ)
+#	$(RM) $(NAME)
+
+#re: clean all
+
+#.PHONY: all clean re
 
 
-INCLUDE_DIR	=	./include
-INCLUDE 	:=	$(addprefix -I, $(INCLUDE_DIR)) 
-HEADERS 	:= 	$(INCLUDE)/philosophers.h
 
-SRC_DIR		= 	./src/core
-SRC_FILES	=	philos.c error_check.c
-SRC			=	$(addprefix $(SRC_DIR)/, $(SRC_FILES))
+# Source, Executable, Includes, Library Defines
+NAME	=	philosopher
+INCL	=	./include
+SRC		=	src/core/philos.c src/core/error_check.c \
+			src/utils/ft_atoi.c src/utils/ft_isdigit.c src/utils/ft_memset.c src/utils/philos_atoi.c
+OBJ		=	./obj
 
-UTIL_DIR 	= 	./src/utils 
-UTIL_FILES	=	ft_atoi.c ft_isdigit.c ft_memset.c philos_atoi.c
-UTIL		=	$(addprefix $(UTIL_DIR)/, $(UTIL_FILES))
+# Compiler, Linker Defines
+CC		=	gcc
+CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=address #-lpthread
+RM		=	rm -rf
 
-OBJ_DIR		=	./obj
-OBJ			=	$(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
-OBJ_UTILS	=	$(UTIL:$(UTIL_DIR)/%.c=$(OBJ_DIR)%.o)
+all:	libfilo bin
 
-RM			=	rm -f
+libfilo:
+	$(CC) -c src/core/error_check.c -I $(INCL) -o $(OBJ)/error_check.o
+	$(CC) -c src/core/get_arguments.c -I $(INCL) -o $(OBJ)/get_arguments.o
+	$(CC) -c src/utils/ft_isdigit.c -I $(INCL) -o $(OBJ)/ft_isdigit.o
+	$(CC) -c src/utils/ft_memset.c -I $(INCL) -o $(OBJ)/ft_memset.o
+	$(CC) -c src/utils/philos_atoi.c -I $(INCL) -o $(OBJ)/philos_atoi.o
 
-CC			=	gcc
-CFLAGS		=	-Wall -Wextra - Werror
-VALGRIND	= 	valgrind -q --leak-check=full --show-leak-kinds=all - s --track-origins=yes
+bin:
+	$(CC) src/core/philos.c $(OBJ)/*.o -I $(INCL) -o philosophers
 
-all: $(NAME)
 
-$(NAME): $(OBJ_DIR) $(OBJ_UTILS) $(OBJ)
-	@echo "\033[32mEXECUTANDO ARQUIVOS...\033[0m"
-	$(CC) $(OBJ) $(CFLAGS) $(OBJ_UTILS) -o $@
+# Compile and Assemble C Source Files into Object Files
 
-$(OBJ_DIR):
-	mkdir $(OBJ_DIR)
 
-$(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c $(UTIL_DIR)/%.c $(HEADERS)
-	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+# Link all Object Files with external Libraries into Binaries
 
-clean:
-	$(RM) $(OBJ)
-	$(RM) $(NAME)
+
+# Clean Up Objects, Exectuables, Dumps out of source directory
+clean: 
+	$(RM) $(OBJ)/*.o philosophers
 
 re: clean all
 
-.PHONY: all clean re
+.PHONY: all clean fclean re bonus

@@ -6,13 +6,13 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 14:28:22 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/01 16:53:15 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/04 15:07:36 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static bool	is_out_of_range(int number)
+static bool	is_out_of_range(double number)
 {
 	if (number > INT_MAX || number == 0)
 		return (true);
@@ -29,7 +29,7 @@ static bool	only_digits(char **argv, int i, int j)
 
 static bool	only_unsigned_integers(int argc, char **argv, int i)
 {
-	while (++i < argc)
+	while (i < argc)
 	{
 		if (!only_digits(argv, i, -1))
 			return false;
