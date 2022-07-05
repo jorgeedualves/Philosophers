@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 22:12:02 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/05 16:41:45 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/05 16:59:35 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,5 @@ bool			error(char *message);
 double			philos_atoi(const char *ptr);
 int				ft_isdigit(int c);
 void			*ft_memset(void *b, int c, size_t len);
-int				ft_atoi(const char *str);
 
 #endif

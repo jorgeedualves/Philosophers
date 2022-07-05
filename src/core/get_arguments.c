@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_argumets.c                                     :+:      :+:    :+:   */
+/*   get_arguments.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 22:39:53 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/05 06:16:25 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/05 17:33:06 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ static void	assign_value(int id, int value, t_dinner *dinner)
 
 	variable = define_variable(id, dinner);
 	*variable =  value;
-	
-	printf("data: %lu\n", *variable);
 }
 
 void	get_arguments(int argc, char **argv, t_dinner *dinner)
