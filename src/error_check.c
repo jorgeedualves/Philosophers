@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 14:28:22 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/06 22:41:09 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/06 23:57:27 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ static bool	is_out_of_range(double number)
 		return (true);
 	return (false);	
 }
-
-
 
 static bool	only_digits(char **argv, int i, int j)
 {

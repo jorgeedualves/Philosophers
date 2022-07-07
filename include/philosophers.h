@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 22:12:02 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/06 22:36:23 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/06 23:55:21 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,20 @@
 #define USAGE        "Usage: ./philo n_philo ms_to_die ms_to_eat ms_to_sleep [number_times_each_philo_must_eat]"
 #define NOT_UNINT    "Arguments must be integers greater than 0"
 
+typedef struct s_data		t_data;
+
+typedef struct s_philo
+{
+	int				left_fork;
+	int				right_fork;
+	int				n_philo;
+	int				n_meals;
+	long int		last_meal;
+	pthread_mutex_t mutex;
+	pthread_t		thread;
+	t_data			*struct_data;
+}			t_philo;
+
 typedef struct s_data
 {
 	int			number_of_philos;
@@ -38,13 +52,19 @@ typedef struct s_data
 	int			checker;
 	int			ate_meal;
 	long int	start_meal;
-//	t_philo		*philo;
+	t_philo		*philo;
 	pthread_t	monitor;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;
 }				t_data;
 
-
+//error_check.c
 bool	error_check(int argc, char **argv);
+
+//utils.c
+int    ft_atoi(const char *ptr);
+long int	get_time(void);
+void	ft_bzero(void *s, size_t n);
+
 
 #endif
