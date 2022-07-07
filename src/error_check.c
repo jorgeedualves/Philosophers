@@ -6,11 +6,32 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 14:28:22 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/05 17:28:55 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/06 22:41:09 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
+
+double    philos_atoi(const char *ptr)
+{
+    double    number;
+
+    number = 0;
+    while (ft_isdigit(*ptr))
+    {
+        number *= 10;
+        number += (*ptr - '0');
+        ptr++;
+    }
+    return (number);
+}
 
 static bool	is_out_of_range(double number)
 {
@@ -18,6 +39,8 @@ static bool	is_out_of_range(double number)
 		return (true);
 	return (false);	
 }
+
+
 
 static bool	only_digits(char **argv, int i, int j)
 {

@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/01 14:32:40 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/01 14:32:45 by joeduard         ###   ########.fr       */
+/*   Created: 2022/07/06 21:57:11 by joeduard          #+#    #+#             */
+/*   Updated: 2022/07/06 22:47:56 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	*ft_memset(void *b, int c, size_t len)
+int main(int argc, char **argv)
 {
-	unsigned char	*ptr;
+    t_data data;
+    int i;
 
-	ptr = (unsigned char *)b;
-	while (len > 0)
-	{
-		*ptr = c;
-		ptr++;
-		len--;
-	}
-	return (b);
+    i = 0;
+    pthread_mutex_init(&data.print, NULL);
+    if (!error_check(argc, argv))
+        return (EXIT_FAILURE);
+
+    (void)i;
+
+    return (0);
 }

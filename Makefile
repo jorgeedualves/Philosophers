@@ -47,37 +47,29 @@
 
 
 # Source, Executable, Includes, Library Defines
-NAME		=	philosopher
+NAME		=	philosophers
 INCL		=	-I include
 
-SRC_DIR		=	./src/core
-SRC			=	philos.c error_check.c get_arguments.c
+SRC_DIR		=	./src
+SRC			=	error_check.c
 
-UTIL_DIR	=	./src/utils
-UTILS		=	ft_isdigit.c ft_memset.c philos_atoi.c
-
-SIM_DIR =	./src/simulation
-SIMULATION	=	init_simulation.c
+UTIL_DIR	=	./utils
+UTILS		=	print_status.c utils_dinner.c utils.c
 
 OBJ			=	./obj
 
 # Compiler, Linker Defines
 CC		=	gcc
-CFLAGS	=	-Wall -Wextra -Werror #-g -fsanitize=address #-lpthread
+CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=address #-lpthread
 RM		=	rm -rf
 
 all:	libfilo bin
 
 libfilo:
-	$(CC) -c $(SRC_DIR)/error_check.c $(INCL) -o $(OBJ)/error_check.o
-	$(CC) -c $(SRC_DIR)/get_arguments.c $(INCL) -o $(OBJ)/get_arguments.o
-	$(CC) -c $(UTIL_DIR)/ft_isdigit.c $(INCL) -o $(OBJ)/ft_isdigit.o
-	$(CC) -c $(UTIL_DIR)/ft_memset.c $(INCL) -o $(OBJ)/ft_memset.o
-	$(CC) -c $(UTIL_DIR)/philos_atoi.c $(INCL) -o $(OBJ)/philos_atoi.o
-	$(CC) -c $(SIM_DIR)/init_simulation.c $(INCL) -o $(OBJ)/init_simulation.o
+	$(CC) -c $(CFLAGS) $(SRC_DIR)/error_check.c $(INCL) -o $(OBJ)/error_check.o
 
 bin:
-	$(CC) $(SRC_DIR)/philos.c $(OBJ)/*.o $(INCL) -o philosophers
+	$(CC)  $(CFLAGS)$(SRC_DIR)/philosophers.c $(OBJ)/*.o $(INCL) -o philosophers
 
 
 # Compile and Assemble C Source Files into Object Files
