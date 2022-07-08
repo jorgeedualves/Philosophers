@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 22:12:02 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/06 23:55:21 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/07 22:39:45 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,11 @@ int    ft_atoi(const char *ptr);
 long int	get_time(void);
 void	ft_bzero(void *s, size_t n);
 
+//utils_dinner.c
+void    *one_philo(t_philo *philo);
+void 	eat(t_philo *philo);
+
+//print_status.c
+void print_status(long int time_now, t_philo *philo, char *status);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 21:57:11 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/07 00:05:16 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/07 22:59:48 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,26 @@ void    philo_info(t_data *data)
     ft_bzero(data->philo, sizeof(t_philo));
     return(philo_info(data));
  }
+
+void     *routine(void *param)
+{
+    t_philo *philo;
+
+    philo = param;
+    if(philo->struct_data->number_of_philos == 1)
+        return (one_philo(philo));
+    if (philo->n_philo % 2 == 0)
+        usleep(1600);
+    while (philo->struct_data->checker != 1)
+    {
+        eat(philo);
+        print_status(get_time(), philo, "is sleeping");
+		usleep(philo->struct_data->time_to_sleep * 1000);
+		print_status(get_time(), philo, "is thinking");
+		philo->n_meals++;
+    }
+    return (NULL);
+}
 
 int	creat_philo(t_data *data)
 {
