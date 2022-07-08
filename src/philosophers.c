@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 21:57:11 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/07 22:59:48 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/08 12:41:11 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ int main(int argc, char **argv)
     data.start_meal = get_time();
     start_struct(&data, argc, argv);
     creat_philo(&data);
+    pthread_create(&data.monitor, NULL, &died, &data);
+
 
     (void)i;
 

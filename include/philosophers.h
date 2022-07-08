@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 22:12:02 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/07 22:39:45 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/08 12:42:32 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ long int	get_time(void);
 void	ft_bzero(void *s, size_t n);
 
 //utils_dinner.c
+void    *died(void *param);
 void    *one_philo(t_philo *philo);
 void 	eat(t_philo *philo);
 

@@ -6,11 +6,41 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 21:43:51 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/07 22:55:39 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/08 13:03:08 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+void    *died(void *param)
+{
+
+    int i;
+    t_data *data;
+
+    data = param;
+    i = -1;
+    while (++i < data->number_of_philos)
+    {
+        if(get_time() - data->philo[i].last_meal > data->time_to_die)
+        {
+            print_status(get_time(), data->philo, "DIED");
+            data->checker = 1;
+            return(NULL);
+        }
+        if (data->philo[i].n_meals == data->must_eat && data->must_eat > 0)
+            data->ate_meal++;
+        if (data->ate_meal == data->number_of_philos)
+        {
+            data->checker = 1;
+            return (NULL);
+        }
+        if (i + 1 == data->number_of_philos)
+            i = -1;
+        usleep (1600);
+    }
+    return (NULL);
+}
 
 void    *one_philo(t_philo *philo)
 {
