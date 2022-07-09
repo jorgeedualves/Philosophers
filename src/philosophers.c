@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 21:57:11 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/08 22:23:16 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/09 00:06:44 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	philo_info(t_data *data)
 	int	i;
 
 	i = 0;
-	while (i < data->number_of_philos)					// philo[0]		|	philo[1]	|	philo[2]
+	while (i < data->number_of_philos)
 	{
-		data->philo[i].philo_ID = i + 1;					//   ID 1		|	ID 2		|	ID 3
-		data->philo[i]. left_fork = i;					//	LEFT = 0	|	= 1			|	= 2
-		data->philo[i].right_fork = i + 1;				//	RIGHT = 1	|	= 2			|	= 0
+		data->philo[i].philo_id = i + 1;
+		data->philo[i]. left_fork = i;
+		data->philo[i].right_fork = i + 1;
 		data->philo[i].struct_data = data;
 		data->philo[i].last_dinner = get_time();
 		data->philo[i].had_dinner = 0;
@@ -57,7 +57,7 @@ void	*routine(void *param)
 	philo = param;
 	if (philo->struct_data->number_of_philos == 1)
 		return (one_philo(philo));
-	if (philo->philo_ID % 2 == 0)
+	if (philo->philo_id % 2 == 0)
 		usleep(1600);
 	while (philo->struct_data->checker != 1)
 	{
@@ -76,8 +76,11 @@ int	creat_philo(t_data *data)
 
 	i = -1;
 	while (++i < data->number_of_philos)
-		pthread_create(&data->philo[i].thread, NULL, &routine, &data->philo[i]);
-	return (i);
+	{
+	if (pthread_create(&data->philo[i].thread, NULL, &routine, &data->philo[i]) != 0)
+		return (error(PTHREAD_FAILURE));
+	}
+	return (1);
 }
 
 int	main(int argc, char **argv)
@@ -92,7 +95,8 @@ int	main(int argc, char **argv)
 	data.start_dinner = get_time();
 	start_struct(&data, argc, argv);
 	creat_philo(&data);
-	pthread_create(&data.monitor, NULL, &died, &data);
+	if (pthread_create(&data.monitor, NULL, &died, &data) != 0)
+		return (error(PTHREAD_FAILURE));
 	while (++i < data.number_of_philos)
 		pthread_join(data.philo[i].thread, NULL);
 	pthread_join(data.monitor, NULL);

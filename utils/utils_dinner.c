@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 21:43:51 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/08 22:22:49 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/09 00:15:35 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	*died(void *param)
 			data->checker = 1;
 			return (NULL);
 		}
-		if (data->philo[i].had_dinner == data->have_to_dinner && data->have_to_dinner > 0)
+		if (data->philo[i].had_dinner == data->have_to_dinner
+			&& data->have_to_dinner > 0)
 			data->ate_dinner++;
 		if (data->ate_dinner == data->number_of_philos)
 		{
