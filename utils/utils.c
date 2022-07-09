@@ -6,35 +6,35 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 22:58:05 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/06 23:55:01 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/08 17:29:58 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int    ft_atoi(const char *ptr)
+int	ft_atoi(const char *ptr)
 {
-    int    res;
-    int    sign;
-    int    i;
+	int	res;
+	int	sign;
+	int	i;
 
-    res = 0;
-    sign = 1;
-    i = 0;
-    while (ptr[i] == ' ' || (ptr[i] >= '\t' && ptr[i] <= '\r' ))
-        i++;
-    if (ptr[i] == '+' || ptr[i] == '-')
-    {
-        if (ptr[i] == '-')
-            sign *= -1;
-        i++;
-    }
-    while (ptr[i] >= '0' && ptr[i] <= '9')
-    {
-        res = ptr[i] - '0' + (res * 10);
-        i++;
-    }
-    return (res * sign);
+	res = 0;
+	sign = 1;
+	i = 0;
+	while (ptr[i] == ' ' || (ptr[i] >= '\t' && ptr[i] <= '\r' ))
+		i++;
+	if (ptr[i] == '+' || ptr[i] == '-')
+	{
+		if (ptr[i] == '-')
+			sign *= -1;
+		i++;
+	}
+	while (ptr[i] >= '0' && ptr[i] <= '9')
+	{
+		res = ptr[i] - '0' + (res * 10);
+		i++;
+	}
+	return (res * sign);
 }
 
 long int	get_time(void)

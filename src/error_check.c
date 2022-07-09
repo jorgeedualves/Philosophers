@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 14:28:22 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/06 23:57:27 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/08 21:59:58 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,25 @@ int	ft_isdigit(int c)
 	return (0);
 }
 
-double    philos_atoi(const char *ptr)
+double	philos_atoi(const char *ptr)
 {
-    double    number;
+	double	number;
 
-    number = 0;
-    while (ft_isdigit(*ptr))
-    {
-        number *= 10;
-        number += (*ptr - '0');
-        ptr++;
-    }
-    return (number);
+	number = 0;
+	while (ft_isdigit(*ptr))
+	{
+		number *= 10;
+		number += (*ptr - '0');
+		ptr++;
+	}
+	return (number);
 }
 
 static bool	is_out_of_range(double number)
 {
 	if (number > INT_MAX || number == 0)
 		return (true);
-	return (false);	
+	return (false);
 }
 
 static bool	only_digits(char **argv, int i, int j)
@@ -45,17 +45,17 @@ static bool	only_digits(char **argv, int i, int j)
 	while (argv[i][++j])
 		if (!ft_isdigit(argv[i][j]))
 			return (false);
-	return (true);	
+	return (true);
 }
 
-static bool	only_unsigned_integers(int argc, char **argv, int i)
+static	bool	only_unsigned_integers(int argc, char **argv, int i)
 {
 	while (++i < argc)
-	{	
+	{
 		if (!only_digits(argv, i, -1))
-			return false;
+			return (false);
 		if (is_out_of_range(philos_atoi(argv[i])))
-			return false;
+			return (false);
 	}
 	return (true);
 }
