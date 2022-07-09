@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 21:57:11 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/09 00:06:44 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/09 00:35:10 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,9 @@ int	creat_philo(t_data *data)
 	i = -1;
 	while (++i < data->number_of_philos)
 	{
-	if (pthread_create(&data->philo[i].thread, NULL, &routine, &data->philo[i]) != 0)
-		return (error(PTHREAD_FAILURE));
+		if (pthread_create(&data->philo[i].thread, NULL, &routine,
+				&data->philo[i]) != 0)
+			return (error(PTHREAD_FAILURE));
 	}
 	return (1);
 }
