@@ -1,90 +1,40 @@
-# Source, Executable, Includes, Library Defines
-#NAME		=		philosophers
+NAME			=	philo
+SOURCES_FILES	=	philosophers.c
+SOURCES_FILES	+=	error_check.c print_status.c utils_dinner.c utils.c
 
-#INCLUDE		=	-I include
+SOURCES_DIR		=	src
 
-#UTIL_DIR 	= 	./src/utils 
-#UTIL		=	$(UTIL_DIR)/utils.a
-#UTIL_FLAGS	=	-L $(UTIL_DIR) -lft
+OBJ_DIR			=	obj
 
-#RM			=	rm -f
+HEADER			=	$(SOURCES_DIR)/philosophers.h
 
-#CC			=	gcc
-#CFLAGS		=	-Wall -Wextra - Werror -g -fsanitize=address -pthreads
-#VALGRIND	= 	valgrind -q --leak-check=full --show-leak-kinds=all - s --track-origins=yes
+SOURCES			=	$(addprefix $(SOURCES_DIR)/, $(SOURCES_FILES))
 
-#CORE		=	philos.c error_check.c
+OBJECTS			=	$(SOURCES:$(SOURCES_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-#SRCS_DIR		=	src
+CC				=	gcc
+RM				=	rm -rf
 
-#FILES		=	$(addprefix CORE/, $(CORE))
+CFLAGS			=	-Wall -Wextra -Werror -g -fsanitize=address
+LDFLAGS			=	-pthread
 
-#SOUCE		=	$(addprefix src/, $(FILES))
+$(OBJ_DIR)/%.o:		$(SOURCES_DIR)/%.c $(HEADER)
+					$(CC) $(CFLAGS) -c $< -o $@
 
-#OBJ_DIR		=	obj
-#OBJS		=	$(subst $(SRCS_DIR),$(OBJ_DIR),$(SOURCE:.c=.o))))	
+all:				$(NAME)
 
-#all: $(NAME)
+$(NAME):			$(OBJ_DIR) $(OBJECTS) $(HEADER)
+					$(CC) $(CFLAGS) $(OBJECTS) $(LDFLAGS) -o $(NAME)
 
-#$(NAME): $(OBJ)
-#	make -C $(UTIL_DIR)
-#	@echo "\033[32mEXECUTANDO ARQUIVOS...\033[0m"
-#	$(CC) $(CFLAGS) $(OBJS) $(UTILS) $(UTIL_FLAGS) -o $@
+$(OBJ_DIR):
+					mkdir -p $(OBJ_DIR)
 
-#$(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c
-#	@mkdir -p obj
-#	@mkdir -p obj/CORE
-#	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+clean:
+					$(RM) $(OBJ_DIR)
 
-#clean:
-#	$(RM) $(OBJ)
-#	$(RM) $(NAME)
+fclean:	clean
+					$(RM) $(NAME)
 
-#re: clean all
+re:	fclean all
 
-#.PHONY: all clean re
-
-
-
-# Source, Executable, Includes, Library Defines
-NAME		=	philosophers
-INCL		=	-I include
-
-SRC_DIR		=	./src
-SRC			=	error_check.c
-
-UTIL_DIR	=	./utils
-UTILS		=	print_status.c utils_dinner.c utils.c
-
-OBJ			=	./obj
-
-# Compiler, Linker Defines
-CC		=	gcc
-CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=address #-lpthread
-RM		=	rm -rf
-
-all:	libfilo bin
-
-libfilo:
-	$(CC) -c $(CFLAGS) $(SRC_DIR)/error_check.c $(INCL) -o $(OBJ)/error_check.o
-	$(CC) -c $(CFLAGS) $(UTIL_DIR)/print_status.c $(INCL) -o $(OBJ)/print_status.o
-	$(CC) -c $(CFLAGS) $(UTIL_DIR)/utils_dinner.c $(INCL) -o $(OBJ)/utils_dinner.o
-	$(CC) -c $(CFLAGS) $(UTIL_DIR)/utils.c $(INCL) -o $(OBJ)/utils.o
-
-bin:
-	$(CC)  $(CFLAGS)$(SRC_DIR)/philosophers.c $(OBJ)/*.o $(INCL) -o philosophers
-
-
-# Compile and Assemble C Source Files into Object Files
-
-
-# Link all Object Files with external Libraries into Binaries
-
-
-# Clean Up Objects, Exectuables, Dumps out of source directory
-clean: 
-	$(RM) $(OBJ)/*.o philosophers
-
-re: clean all
-
-.PHONY: all clean fclean re bonus
+.PHONY:all clean fclean re bonus

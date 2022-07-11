@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 21:57:11 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/10 22:02:15 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/11 16:58:26 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	start_struct(t_data *data, int argc, char **argv)
 	data->time_to_eat = ft_atoi(argv[3]);
 	data->time_to_sleep = ft_atoi(argv[4]);
 	if (argc > 5)
-		data->have_to_dinner = ft_atoi(argv[5]);
+		data->to_dinner = ft_atoi(argv[5]);
 	else
-		data->have_to_dinner = 0;
+		data->to_dinner = 0;
 	data->forks = NULL;
 	data->philo = malloc(data->number_of_philos * sizeof(t_philo));
 	data->forks = malloc(data->number_of_philos * sizeof(pthread_mutex_t));
@@ -79,7 +79,10 @@ int	creat_philo(t_data *data)
 	{
 		if (pthread_create(&data->philo[i].thread, NULL, &routine,
 				&data->philo[i]) != 0)
-			return (error(PTHREAD_FAILURE));
+		{
+			printf("Could not create thread");
+			return (EXIT_FAILURE);
+		}
 	}
 	return (1);
 }

@@ -6,31 +6,16 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 14:28:22 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/08 21:59:58 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/11 16:29:53 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	ft_isdigit(int c)
+bool	error(char *message)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
-}
-
-double	philos_atoi(const char *ptr)
-{
-	double	number;
-
-	number = 0;
-	while (ft_isdigit(*ptr))
-	{
-		number *= 10;
-		number += (*ptr - '0');
-		ptr++;
-	}
-	return (number);
+	printf("%s\n", message);
+	return (false);
 }
 
 static bool	is_out_of_range(double number)
@@ -58,12 +43,6 @@ static	bool	only_unsigned_integers(int argc, char **argv, int i)
 			return (false);
 	}
 	return (true);
-}
-
-bool	error(char *message)
-{
-	printf("%s\n", message);
-	return (false);
 }
 
 bool	error_check(int argc, char **argv)

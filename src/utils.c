@@ -6,11 +6,18 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 22:58:05 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/08 17:29:58 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/11 16:33:37 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
 
 int	ft_atoi(const char *ptr)
 {
@@ -35,6 +42,20 @@ int	ft_atoi(const char *ptr)
 		i++;
 	}
 	return (res * sign);
+}
+
+double	philos_atoi(const char *ptr)
+{
+	double	number;
+
+	number = 0;
+	while (ft_isdigit(*ptr))
+	{
+		number *= 10;
+		number += (*ptr - '0');
+		ptr++;
+	}
+	return (number);
 }
 
 long int	get_time(void)

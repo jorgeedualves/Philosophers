@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 22:12:02 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/09 00:04:48 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/11 16:31:38 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_data
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
-	int				have_to_dinner;
+	int				to_dinner;
 	int				checker;
 	int				ate_dinner;
 	long int		start_dinner;
@@ -62,8 +62,11 @@ typedef struct s_data
 //error_check.c
 bool		error_check(int argc, char **argv);
 bool		error(char *message);
+
 //utils.c
+int			ft_isdigit(int c);
 int			ft_atoi(const char *ptr);
+double		philos_atoi(const char *ptr);
 long int	get_time(void);
 void		ft_bzero(void *s, size_t n);
 
