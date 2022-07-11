@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 21:57:11 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/09 00:35:10 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/10 22:02:15 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,9 @@ int	main(int argc, char **argv)
 	creat_philo(&data);
 	if (pthread_create(&data.monitor, NULL, &died, &data) != 0)
 		return (error(PTHREAD_FAILURE));
+	pthread_join(data.monitor, NULL);
 	while (++i < data.number_of_philos)
 		pthread_join(data.philo[i].thread, NULL);
-	pthread_join(data.monitor, NULL);
 	free(data.philo);
 	free(data.forks);
 	return (0);
