@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 21:43:51 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/10 22:14:51 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/11 23:32:22 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	*died(void *param)
 		}
 		if (i + 1 == data->number_of_philos)
 			i = -1;
-	//	usleep (1600);
+	usleep (1000);
 	}
 	return (NULL);
 }

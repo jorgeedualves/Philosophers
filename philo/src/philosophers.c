@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 21:57:11 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/11 16:58:26 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/11 23:38:23 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ void	*routine(void *param)
 	philo = param;
 	if (philo->struct_data->number_of_philos == 1)
 		return (one_philo(philo));
-	if (philo->philo_id % 2 == 0)
-		usleep(1600);
 	while (philo->struct_data->checker != 1)
 	{
+		if (philo->philo_id % 2 == 0)
+			usleep(1000);
 		eat(philo);
 		print_status(get_time(), philo, "is sleeping");
 		usleep(philo->struct_data->time_to_sleep * 1000);
@@ -104,6 +104,7 @@ int	main(int argc, char **argv)
 	pthread_join(data.monitor, NULL);
 	while (++i < data.number_of_philos)
 		pthread_join(data.philo[i].thread, NULL);
+	usleep(1000);
 	free(data.philo);
 	free(data.forks);
 	return (0);
