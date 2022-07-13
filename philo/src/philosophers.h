@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 22:12:02 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/13 16:10:08 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/13 17:24:27 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define USAGE "Usage: ./philo philo_id ms_to_die ms_eat ms_sleep [have_to_eat]"
 # define NOT_UNINT "Arguments must be integers greater than 0"
 # define PTHREAD_FAILURE "Could not create thread"
+# define JOIN_FAILURE "Could not join thread"
 
 typedef struct s_data		t_data;
 

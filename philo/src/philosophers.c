@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 21:57:11 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/13 16:35:00 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/13 17:24:38 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,11 @@ void	start_struct(t_data *data, int argc, char **argv)
 	data->forks = NULL;
 	data->philo = malloc(data->number_of_philos * sizeof(t_philo));
 	data->forks = malloc(data->number_of_philos * sizeof(pthread_mutex_t));
-	if(data->forks == NULL || data->philo == NULL)
-		error("erro malloc start struct");
+	if (data->forks == NULL || data->philo == NULL)
+	{
+		printf("Could not Malloc struct");
+		EXIT_FAILURE;
+	}
 	data->ate_dinner = 0;
 	ft_bzero(data->philo, sizeof(t_philo));
 	return (philo_info(data));
@@ -87,10 +90,7 @@ int	creat_philo(t_data *data)
 	{
 		if (pthread_create(&data->philo[i].thread, NULL, &routine,
 				&data->philo[i]) != 0)
-		{
-			printf("Could not create thread");
-			return (EXIT_FAILURE);
-		}
+			return (error(PTHREAD_FAILURE));
 	}
 	return (1);
 }
@@ -111,7 +111,8 @@ int	main(int argc, char **argv)
 	creat_philo(&data);
 	if (pthread_create(&data.monitor, NULL, &died, &data) != 0)
 		return (error(PTHREAD_FAILURE));
-	pthread_join(data.monitor, NULL);
+	if(pthread_join(data.monitor, NULL) != 0)
+		return (error(JOIN_FAILURE));
 	while (++i < data.number_of_philos)
 		pthread_join(data.philo[i].thread, NULL);
 	usleep(1000);
