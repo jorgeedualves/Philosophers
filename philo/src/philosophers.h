@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 22:12:02 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/11 16:31:38 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/13 16:10:08 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct s_data
 	t_philo			*philo;
 	pthread_t		monitor;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	meal;
+	pthread_mutex_t	m_checker;
 	pthread_mutex_t	print;
 }				t_data;
 

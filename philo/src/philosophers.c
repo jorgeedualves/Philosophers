@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 21:57:11 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/11 23:38:23 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/13 16:35:00 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	philo_info(t_data *data)
 	while (i < data->number_of_philos)
 	{
 		data->philo[i].philo_id = i + 1;
-		data->philo[i]. left_fork = i;
+		data->philo[i].left_fork = i;
 		data->philo[i].right_fork = i + 1;
 		data->philo[i].struct_data = data;
 		data->philo[i].last_dinner = get_time();
@@ -45,6 +45,8 @@ void	start_struct(t_data *data, int argc, char **argv)
 	data->forks = NULL;
 	data->philo = malloc(data->number_of_philos * sizeof(t_philo));
 	data->forks = malloc(data->number_of_philos * sizeof(pthread_mutex_t));
+	if(data->forks == NULL || data->philo == NULL)
+		error("erro malloc start struct");
 	data->ate_dinner = 0;
 	ft_bzero(data->philo, sizeof(t_philo));
 	return (philo_info(data));
@@ -57,7 +59,7 @@ void	*routine(void *param)
 	philo = param;
 	if (philo->struct_data->number_of_philos == 1)
 		return (one_philo(philo));
-	while (philo->struct_data->checker != 1)
+	while (true)
 	{
 		if (philo->philo_id % 2 == 0)
 			usleep(1000);
@@ -65,7 +67,13 @@ void	*routine(void *param)
 		print_status(get_time(), philo, "is sleeping");
 		usleep(philo->struct_data->time_to_sleep * 1000);
 		print_status(get_time(), philo, "is thinking");
-		philo->had_dinner++;
+		pthread_mutex_lock(&philo->struct_data->m_checker);
+		if (philo->struct_data->checker == 1)
+		{
+			pthread_mutex_unlock(&philo->struct_data->m_checker);
+			break ;
+		}
+		pthread_mutex_unlock(&philo->struct_data->m_checker);
 	}
 	return (NULL);
 }
@@ -92,8 +100,10 @@ int	main(int argc, char **argv)
 	t_data	data;
 	int		i;
 
-	i = 0;
+	i = -1;
+	pthread_mutex_init(&data.meal, NULL);
 	pthread_mutex_init(&data.print, NULL);
+	pthread_mutex_init(&data.m_checker, NULL);
 	if (!error_check(argc, argv))
 		return (EXIT_FAILURE);
 	data.start_dinner = get_time();
@@ -105,6 +115,12 @@ int	main(int argc, char **argv)
 	while (++i < data.number_of_philos)
 		pthread_join(data.philo[i].thread, NULL);
 	usleep(1000);
+	pthread_mutex_destroy(&data.print);
+	pthread_mutex_destroy(&data.meal);
+	pthread_mutex_destroy(&data.m_checker);
+	i = -1;
+	while (++i < data.number_of_philos)
+		pthread_mutex_destroy(&data.forks[i]);
 	free(data.philo);
 	free(data.forks);
 	return (0);

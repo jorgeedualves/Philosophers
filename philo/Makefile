@@ -15,7 +15,8 @@ OBJECTS			=	$(SOURCES:$(SOURCES_DIR)/%.c=$(OBJ_DIR)/%.o)
 CC				=	gcc
 RM				=	rm -rf
 
-CFLAGS			=	-Wall -Wextra -Werror -g -fsanitize=address
+#CFLAGS			=	-Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS			=	-Wall -Wextra -Werror -g -fsanitize=thread
 LDFLAGS			=	-pthread
 
 $(OBJ_DIR)/%.o:		$(SOURCES_DIR)/%.c $(HEADER)
@@ -38,3 +39,6 @@ fclean:	clean
 re:	fclean all
 
 .PHONY:all clean fclean re bonus
+
+runv:
+	$(MAKE) && valgrind --tool=helgrind ./philo 3 410 100 100
