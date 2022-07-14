@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 21:51:20 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/14 01:03:53 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/14 09:07:21 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,27 @@ void	print_status(long int time_now, t_philo *philo, char *status)
 	pthread_mutex_unlock(&philo->struct_data->print);
 }
 
-int	if_philo_died(t_data *data, int i)
+int	is_a_death_philo(t_data *data, int i)
 {
 	if (get_time() - data->philo[i].last_dinner > data->time_to_die)
 	{
-		print_status(get_time(), data->philo + i, "DIED");
+		print_status(get_time(), data->philo + i, "DIED 💀");
 		pthread_mutex_lock(&data->m_checker);
 		data->checker = 1;
 		pthread_mutex_unlock(&data->m_checker);
 		pthread_mutex_unlock(&data->meal);
+		return (1);
+	}
+	return (0);
+}
+
+int	all_philo_satisfied(t_data *data)
+{
+	if (data->ate_dinner == data->number_of_philos)
+	{
+		pthread_mutex_lock(&data->m_checker);
+		data->checker = 1;
+		pthread_mutex_unlock(&data->m_checker);
 		return (1);
 	}
 	return (0);

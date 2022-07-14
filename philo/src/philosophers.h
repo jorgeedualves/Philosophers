@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 22:12:02 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/14 01:02:19 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/14 09:11:01 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_philo
 	int				philo_id;
 	int				had_dinner;
 	long int		last_dinner;
+	bool			eating;
 	pthread_mutex_t	mutex;
 	pthread_t		thread;
 	t_data			*struct_data;
@@ -72,9 +73,10 @@ void		destroy_mutex(t_data *data);
 void		mutex_lock_fork(t_philo *philo);
 void		mutex_unlock_fork(t_philo *philo);
 
-//print_status.c
+//philo_status.c
 void		print_status(long int time_now, t_philo *philo, char *status);
-int			if_philo_died(t_data *data, int i);
+int			is_a_death_philo(t_data *data, int i);
+int			all_philo_satisfied(t_data *data);
 //utils_dinner.c
 void		*died(void *param);
 void		*one_philo(t_philo *philo);

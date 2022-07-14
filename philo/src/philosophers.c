@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 21:57:11 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/14 00:24:31 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/14 08:57:42 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ void	*routine(void *param)
 		if (philo->philo_id % 2 == 0)
 			usleep(1000);
 		eat(philo);
-		print_status(get_time(), philo, "is sleeping");
+		print_status(get_time(), philo, "is sleeping 😴");
 		usleep(philo->struct_data->time_to_sleep);
-		print_status(get_time(), philo, "is thinking");
+		print_status(get_time(), philo, "is thinking 🤔");
 		pthread_mutex_lock(&philo->struct_data->m_checker);
 		if (philo->struct_data->checker == 1)
 		{
