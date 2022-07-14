@@ -1,6 +1,6 @@
 NAME			=	philo
 SOURCES_FILES	=	philosophers.c
-SOURCES_FILES	+=	error_check.c print_status.c utils_dinner.c utils.c
+SOURCES_FILES	+=	error_check.c philo_status.c utils_dinner.c utils.c mutex.c
 
 SOURCES_DIR		=	src
 

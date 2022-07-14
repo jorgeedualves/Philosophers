@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 22:12:02 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/13 17:24:27 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/14 01:02:19 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,25 @@ typedef struct s_data
 bool		error_check(int argc, char **argv);
 bool		error(char *message);
 
+//mutex.c
+void		init_mutex(t_data *data);
+void		destroy_mutex(t_data *data);
+void		mutex_lock_fork(t_philo *philo);
+void		mutex_unlock_fork(t_philo *philo);
+
+//print_status.c
+void		print_status(long int time_now, t_philo *philo, char *status);
+int			if_philo_died(t_data *data, int i);
+//utils_dinner.c
+void		*died(void *param);
+void		*one_philo(t_philo *philo);
+void		eat(t_philo *philo);
+
 //utils.c
 int			ft_isdigit(int c);
 int			ft_atoi(const char *ptr);
 double		philos_atoi(const char *ptr);
 long int	get_time(void);
 void		ft_bzero(void *s, size_t n);
-
-//utils_dinner.c
-void		*died(void *param);
-void		*one_philo(t_philo *philo);
-void		eat(t_philo *philo);
-
-//print_status.c
-void		print_status(long int time_now, t_philo *philo, char *status);
 
 #endif
