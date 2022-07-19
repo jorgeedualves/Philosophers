@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 21:57:11 by joeduard          #+#    #+#             */
-/*   Updated: 2022/07/14 08:57:42 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/07/14 10:17:08 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,32 +53,6 @@ void	start_struct(t_data *data, int argc, char **argv)
 	data->ate_dinner = 0;
 	ft_bzero(data->philo, sizeof(t_philo));
 	return (philo_info(data));
-}
-
-void	*routine(void *param)
-{
-	t_philo	*philo;
-
-	philo = param;
-	if (philo->struct_data->number_of_philos == 1)
-		return (one_philo(philo));
-	while (true)
-	{
-		if (philo->philo_id % 2 == 0)
-			usleep(1000);
-		eat(philo);
-		print_status(get_time(), philo, "is sleeping 😴");
-		usleep(philo->struct_data->time_to_sleep);
-		print_status(get_time(), philo, "is thinking 🤔");
-		pthread_mutex_lock(&philo->struct_data->m_checker);
-		if (philo->struct_data->checker == 1)
-		{
-			pthread_mutex_unlock(&philo->struct_data->m_checker);
-			break ;
-		}
-		pthread_mutex_unlock(&philo->struct_data->m_checker);
-	}
-	return (NULL);
 }
 
 int	creat_philo(t_data *data)
