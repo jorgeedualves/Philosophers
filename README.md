@@ -21,13 +21,13 @@ Todos os Philosophers tem três ações: comer, pensar ou dormir. Quando um fil�
 - Rigor
 
 ## Demo
-<img src="img/philosopherse.gif">
+<img src="philo/img/philosopherse.gif">
 
 ## My grade
-<img src="img/score.png">
+<img src="philo/img/score.png">
 
 ## Flowchat:
-<img src="img/philo.png">
+<img src="philo/img/philo.png">
 
 
 🚧 project:<br/>
