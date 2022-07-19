@@ -15,13 +15,16 @@ Há cinco filósofos sentados ao redor de uma mesa de jantar circular!
 Para comer, eles precisam de 2 garfos, mas há apenas um garfo para cada Philosopher. Então os philosophers tentarão pegar o garfo à direita e à esquerda, um de cada vez.  Se ele conseguir pegar os dois garfos, ele comerá a comida em um determinado momento e colocará os garfos na mesa, vai dormir e depois vai pensar novamente.
 Todos os Philosophers tem três ações: comer, pensar ou dormir. Quando um filósofo fica com fome, ele tentará comer!
 
+## Badge
+<img src="philo/img/philosophers.png">
+
 ## Skills
 - Unix
 - Imperative programming
 - Rigor
 
 ## Demo
-<img src="philo/img/philosopherse.gif">
+<img src="philo/img/philosophers.gif">
 
 ## My grade
 <img src="philo/img/score.png">
