@@ -6,14 +6,45 @@ Philosophres dynamics are resolved using threads and mutex. A separate thread ha
 Thread é a palavra chave desse projeto!
 A dinamica dos Philosophres é resolvida usando threads e mutex. Uma thread separada foi implementada para o monitoramento do Philosophers,para verificar se algum filósofo morreu e avisa os outros que precisam parar imediatamente.
 
-## Problem to solve
-There are five philosophers sitting around a circular dining table!
-To eat, they need 2 forks, but there is only one fork for each Philosopher. Then the philosophers will try to take the fork to the right and to the left, one at a time. If he manages to get both forks, he will eat the food at a certain time and put the forks on the table, go to sleep and then think again.
-All Philosophers have three actions: eat, think, or sleep. When a philosopher gets hungry, he will try to eat!
+## Problem to solve <br>
 
-Há cinco filósofos sentados ao redor de uma mesa de jantar circular!
-Para comer, eles precisam de 2 garfos, mas há apenas um garfo para cada Philosopher. Então os philosophers tentarão pegar o garfo à direita e à esquerda, um de cada vez.  Se ele conseguir pegar os dois garfos, ele comerá a comida em um determinado momento e colocará os garfos na mesa, vai dormir e depois vai pensar novamente.
-Todos os Philosophers tem três ações: comer, pensar ou dormir. Quando um filósofo fica com fome, ele tentará comer!
+One or more philosophers are sitting at a round table doing one of three things:
+eating, thinking, or sleeping. <br>
+• While eating, they are not thinking or sleeping, while sleeping, they are not eating
+or thinking and of course, while thinking, they are not eating or sleeping.<br>
+• The philosophers sit at a circular table with a large bowl of spaghetti in the center.<br>
+• There are some forks on the table.<br>
+• As spaghetti is difficult to serve and eat with a single fork, it is assumed that a
+philosopher must eat with two forks, one for each hand.<br>
+• The philosophers must never be starving.<br>
+• Every philosopher needs to eat.<br>
+• Philosophers don’t speak with each other.<br>
+• Philosophers don’t know when another philosopher is about to die.<br>
+• Each time a philosopher has finished eating, he will drop his forks and start sleeping.<br>
+• When a philosopher is done sleeping, he will start thinking.<br>
+• The simulation stops when a philosopher dies.<br>
+• Each program should have the same options: number_of_philosophers time_to_die
+time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat].<br>
+• number_of_philosophers: is the number of philosophers and also the number of forks <br>
+• time_to_die: is in milliseconds, if a philosopher doesn’t start eating ’time_to_die’
+milliseconds after starting his last meal or the beginning of the simulation, it dies <br>
+• time_to_eat: is in milliseconds and is the time it takes for a philosopher to eat. During that time he will need to keep the two forks. <br>
+• time_to_sleep: is in milliseconds and is the time the philosopher will spend sleeping. <br>
+• number_of_times_each_philosopher_must_eat: argument is optional, if all philosophers eat at least ’number_of_times_each_philosopher_must_eat’ 
+the simulation will stop. If not specified, the simulation will stop only at the death of a philosopher<br>
+
+Um ou mais filósofos estão sentados em uma mesa redonda fazendo uma das três coisas: comendo, pensando ou dormindo.<br>
+• Enquanto comem, eles não estão pensando ou dormindo, enquanto dormem, eles não estão comendo ou pensando e, claro, enquanto pensam, eles não estão comendo ou dormindo.<br>
+• Os filósofos sentam-se a uma mesa circular com uma grande tigela de espaguete no centro.<br>
+• Existem alguns garfos na mesa.<br>
+• Como o espaguete é difícil de servir e comer com um único garfo, presume-se que um o filósofo deve comer com dois garfos, um para cada mão.<br>
+• Os filósofos nunca devem passar fome.<br>
+• Todo filósofo precisa comer.<br>
+• Os filósofos não falam uns com os outros.<br>
+• Os filósofos não sabem quando outro filósofo está para morrer.<br>
+• Cada vez que um filósofo termina de comer, ele larga os garfos e começa a dormir.<br>
+• Quando um filósofo termina de dormir, ele começa a pensar.<br>
+• A simulação para quando um filósofo morre.<br>
 
 ## Badge
 <img src="philo/img/philosophers.png">
